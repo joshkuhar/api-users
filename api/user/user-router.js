@@ -1,7 +1,7 @@
 var userRouter = require('express').Router();
 var User = require('./user');
 
-userRouter.post('./user', function(req, res) {
+userRouter.post('/user', function(req, res) {
 	User.create({
 		user: req.body.user
 	}, function(err, user){
@@ -71,4 +71,4 @@ userRouter.get('/user', function(req, res){
 //         });
 // });
 
-module.exports = User;
+module.exports = userRouter;

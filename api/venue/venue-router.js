@@ -1,23 +1,5 @@
-// var CategoryRouter = require('express').Router();
-// var Category = require('./categoryModel');
-
 var venueRouter = require('express').Router();
 var Venue = require('./venue');
-
-// CategoryRouter.post('/categories', function(req, res) {
-// 	console.log('categories endpoint hit');
-// 	Category.create(req.body.categories, function(err, categories) {
-// 		if (err) {
-// 			//console.log(err);
-// 			return res.status(500).json({
-// 				message: 'Internal Server Error'
-// 				});
-// 			} 
-// 			res.status(200).json(categories);
-// 		});   
-//     });
-
-
 
 venueRouter.post('/venue', function(req, res) {
 	Venue.create({venue: req.body.venue}, function(err, venue){
@@ -31,7 +13,6 @@ venueRouter.post('/venue', function(req, res) {
 	});
 });
 
-
 venueRouter.get('/venue', function(req, res) {
 	Venue.find({}, function(err, venues){
 		if (err) {
@@ -42,7 +23,6 @@ venueRouter.get('/venue', function(req, res) {
 		res.status(200).json(venues);
 	});
 });
-
 
 // CategoryRouter.get('/categories/:categoryId/:number', function(req, res){
 // 	var number = parseInt(req.params.number)

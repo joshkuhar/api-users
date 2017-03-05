@@ -10,8 +10,8 @@ app.use(jsonParser);
 app.use(bodyParser.urlencoded({extended: false}));
 
 var Venue = require('./api/venue/venue-router');
-
-
+var User = require('./api/user/user-router');
+var Club = require('./api/club/club-router');
 
 var runServer = function(callback) {
     mongoose.connect(config.DATABASE_URL, function(err) {
@@ -80,7 +80,8 @@ if (require.main === module) {
 // app.use('/', userRouter);
 
 app.use('/', Venue);
-
+app.use('/', User);
+app.use('/', Club);
 // app.use(function(err, req, res, next){
 // 	 console.log("oops");
 // 	 res.status(500).send(err);

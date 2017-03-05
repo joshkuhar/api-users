@@ -1,19 +1,57 @@
-// var CategoryRouter = require('express').Router();
-// var Category = require('./categoryModel');
+// var userRouter = require('express').Router();
+// var User = require('./user');
 
+var clubRouter = require('express').Router();
+var Club = require('./club');
 
-// CategoryRouter.post('/categories', function(req, res) {
-// 	console.log('categories endpoint hit');
-// 	Category.create(req.body.categories, function(err, categories) {
-// 		if (err) {
-// 			//console.log(err);
+clubRouter.post('/club', function(req, res){
+	Club.create({
+		club: req.body.club
+	}, function(err, club){
+		if (err) {
+			return res.status(500).json({
+				message: 'Internal Server Error'
+			});
+		}
+		res.status(200).json(club);
+	});
+});
+
+clubRouter.get('/club', function(req, res){
+	Club.find({},
+		function(err, clubs){
+			if (err) {
+				return res.status(500).json({
+					message: 'Internal Server Error'
+				});
+			}
+			res.status(200).json(clubs);
+		});
+});
+
+// userRouter.post('/user', function(req, res) {
+// 	User.create({
+// 		user: req.body.user
+// 	}, function(err, user){
+// 		if(err) {
 // 			return res.status(500).json({
 // 				message: 'Internal Server Error'
-// 				});
-// 			} 
-// 			res.status(200).json(categories);
-// 		});   
-//     });
+// 			});
+// 		}
+// 		res.status(200).json(user);
+// 	});
+// });
+
+// userRouter.get('/user', function(req, res){
+// 	User.find({}, function(err, users){
+// 		if (err) {
+// 			return res.status(500).json({
+// 				message: 'Internal Server Error'
+// 			});
+// 		}
+// 		res.status(200).json(users);
+// 	});
+// });
 
 // CategoryRouter.get('/categories/:categoryId/:number', function(req, res){
 // 	var number = parseInt(req.params.number)
@@ -60,3 +98,4 @@
 //             res.status(204).end();
 //         });
 // });
+module.exports = clubRouter;
