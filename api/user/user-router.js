@@ -1,19 +1,29 @@
-// var CategoryRouter = require('express').Router();
-// var Category = require('./categoryModel');
+var userRouter = require('express').Router();
+var User = require('./user');
 
+userRouter.post('./user', function(req, res) {
+	User.create({
+		user: req.body.user
+	}, function(err, user){
+		if(err) {
+			return res.status(500).json({
+				message: 'Internal Server Error'
+			});
+		}
+		res.status(200).json(user);
+	});
+});
 
-// CategoryRouter.post('/categories', function(req, res) {
-// 	console.log('categories endpoint hit');
-// 	Category.create(req.body.categories, function(err, categories) {
-// 		if (err) {
-// 			//console.log(err);
-// 			return res.status(500).json({
-// 				message: 'Internal Server Error'
-// 				});
-// 			} 
-// 			res.status(200).json(categories);
-// 		});   
-//     });
+userRouter.get('/user', function(req, res){
+	User.find({}, function(err, users){
+		if (err) {
+			return res.status(500).json({
+				message: 'Internal Server Error'
+			});
+		}
+		res.status(200).json(users);
+	});
+});
 
 // CategoryRouter.get('/categories/:categoryId/:number', function(req, res){
 // 	var number = parseInt(req.params.number)
@@ -60,3 +70,5 @@
 //             res.status(204).end();
 //         });
 // });
+
+module.exports = User;
