@@ -25,6 +25,16 @@ userRouter.get('/user', function(req, res){
 	});
 });
 
+// dot route method
+// userRouter.route('/user')
+// 	.post(function(req, res) {
+// 		res.json({message: "hello world"});
+// 	})
+// 	.get(function(req, res) {
+// 		res.json({message: "hello get"});
+// 	});
+
+
 // CategoryRouter.get('/categories/:categoryId/:number', function(req, res){
 // 	var number = parseInt(req.params.number)
 // 	Category.findOne({
