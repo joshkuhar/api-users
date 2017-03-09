@@ -9,10 +9,11 @@ var app = express();
 app.use(jsonParser); 
 app.use(bodyParser.urlencoded({extended: false}));
 
-var Venue = require('./api/venue/venue-router');
+// var Venue = require('./api/venue/venue-router');
 // var User = require('./api/user/user-router');
 // var Users = require('./api/user/user-routes');
-var Users = require('./api/api');
+// var Users = require('./api/api');
+var api = require('./api/api');
 var Club = require('./api/club/club-router');
 
 var runServer = function(callback) {
@@ -81,8 +82,9 @@ if (require.main === module) {
 
 // app.use('/', userRouter);
 
-app.use('/', Venue);
-app.use('/', Users);
+// app.use('/', Venue);
+// app.use('/', Users);
+app.use('/', api);
 app.use('/', Club);
 // app.use(function(err, req, res, next){
 // 	 console.log("oops");

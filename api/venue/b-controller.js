@@ -1,28 +1,27 @@
-var venueRouter = require('express').Router();
-var Venue = require('./venue');
+var Venue = require('./c-model');
 
-venueRouter.post('/venue', function(req, res) {
-	Venue.create({venue: req.body.venue}, function(err, venue){
-		console.log(req);
-		if(err) {
-			return res.status(500).json({
-				message: 'Internal Server Error'
-			});
-		}
-		res.status(200).json(venue);
-	});
-});
+exports.post = function(req, res, next) {
+	Venue.create({
+		venue: req.body.venue
+	})
+		.then(function(venue){
+			res.status(200).json(venue);
+		})
+		.then(function(err){
+			next(err);
+		});
+};
 
-venueRouter.get('/venue', function(req, res) {
-	Venue.find({}, function(err, venues){
-		if (err) {
-			return res.status(500).json({
-				message: 'Internal server stuff'
-			});
-		}
-		res.status(200).json(venues);
-	});
-});
+exports.get = function(req, res, next) {
+	Venue.find({})
+		.then(function(venues){
+			res.status(200).json(venues);
+		})
+		.then(function(err){
+			next(err);
+		});
+};
+
 
 // CategoryRouter.get('/categories/:categoryId/:number', function(req, res){
 // 	var number = parseInt(req.params.number)
@@ -70,4 +69,4 @@ venueRouter.get('/venue', function(req, res) {
 //         });
 // });
 
-module.exports = venueRouter;
+// module.exports = venueRouter;
