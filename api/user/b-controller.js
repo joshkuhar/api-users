@@ -1,7 +1,6 @@
 var User = require('./c-model');
 
 exports.post = function(req, res, next) {
-	console.log('I was hit');
 	User.create({
 		user: req.body.user
 	})
@@ -22,3 +21,4 @@ exports.get = function(req, res, next) {
 			next(err);
 		});
 };
+

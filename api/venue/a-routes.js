@@ -5,4 +5,7 @@ router.route('/')
 	.get(controller.get)
 	.post(controller.post)
 
+router.route('/:place')
+	.get(controller.getOne)
+
 module.exports = router

@@ -1,33 +1,50 @@
-// var userRouter = require('express').Router();
-// var User = require('./user');
+var Club = require('./c-model');
 
-var clubRouter = require('express').Router();
-var Club = require('./club');
-
-clubRouter.post('/club', function(req, res){
+exports.post = function(req, res, next){
 	Club.create({
 		club: req.body.club
-	}, function(err, club){
-		if (err) {
-			return res.status(500).json({
-				message: 'Internal Server Error'
-			});
-		}
-		res.status(200).json(club);
-	});
-});
-
-clubRouter.get('/club', function(req, res){
-	Club.find({},
-		function(err, clubs){
-			if (err) {
-				return res.status(500).json({
-					message: 'Internal Server Error'
-				});
-			}
-			res.status(200).json(clubs);
+	})
+		.then(function(club){
+			res.status(200).json(club);
+		})
+		.then(function(err){
+			next(err);
 		});
-});
+};
+
+exports.get = function(req, res, next){
+	Club.find({})
+		.then(function(clubs){
+			res.status(200).json(clubs);
+		})
+		.then(function(err){
+			next(err);
+		})
+};
+// clubRouter.post('/club', function(req, res){
+// 	Club.create({
+// 		club: req.body.club
+// 	}, function(err, club){
+// 		if (err) {
+// 			return res.status(500).json({
+// 				message: 'Internal Server Error'
+// 			});
+// 		}
+// 		res.status(200).json(club);
+// 	});
+// });
+
+// clubRouter.get('/club', function(req, res){
+// 	Club.find({},
+// 		function(err, clubs){
+// 			if (err) {
+// 				return res.status(500).json({
+// 					message: 'Internal Server Error'
+// 				});
+// 			}
+// 			res.status(200).json(clubs);
+// 		});
+// });
 
 // userRouter.post('/user', function(req, res) {
 // 	User.create({
@@ -98,4 +115,4 @@ clubRouter.get('/club', function(req, res){
 //             res.status(204).end();
 //         });
 // });
-module.exports = clubRouter;
+// module.exports = clubRouter;
