@@ -29,13 +29,22 @@ var User = require('./user-model');
 
 // module.exports = userRouter;
 
-exports.get = function(req, res) {
-	User.find({}, function(err, users){
-		if(err) {
-			return res.status(500).json({
-				message: 'Internal Server Error'
-			});
-		}
-		res.status(200).json(users);
-	});
-};
+exports.get = function(req, res, next) {
+	User.find({})
+		.then(function(users){
+			res.status(200).json(users);
+		})
+		.then(function(err){
+			next(err);
+		});
+	};
+
+// function(users){
+// 		if(err) {
+// 			return res.status(500).json({
+// 				message: 'Internal Server Error'
+// 			});
+// 		}
+		
+// 	});
+// };
